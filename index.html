@@ -71,10 +71,22 @@
             }
         }
 
-        fetchExchangeRates('USD');
+        // Function to update base currency selection from URL
+        function getBaseCurrencyFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('baseCurrency') || 'USD'; // Default to 'USD' if not found
+        }
 
+        // Set the base currency dropdown based on the URL or default to 'USD'
+        const baseCurrencyFromUrl = getBaseCurrencyFromUrl();
+        document.getElementById('base-currency').value = baseCurrencyFromUrl;
+        fetchExchangeRates(baseCurrencyFromUrl);
+
+        // Handle base currency change event
         document.getElementById('base-currency').addEventListener('change', (event) => {
             const selectedBaseCurrency = event.target.value;
+            // Update the URL with the selected base currency
+            window.history.replaceState({}, '', `?baseCurrency=${selectedBaseCurrency}`);
             fetchExchangeRates(selectedBaseCurrency);
         });
     </script>
