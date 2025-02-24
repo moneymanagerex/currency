@@ -25,6 +25,7 @@
     <table>
         <thead>
             <tr>
+                <th>#</th> <!-- Index column added -->
                 <th class="currency">Currency</th>
                 <th>Indirect Rate (Currency to Base)</th>
                 <th>Direct Rate (Base to Currency)</th>
@@ -55,6 +56,8 @@
             const tableBody = document.getElementById('exchange-rates');
             tableBody.innerHTML = '';
 
+            let index = 1;  // Start index at 1
+
             for (let currency in rates) {
                 if (currency !== baseCurrency) {
                     const row = document.createElement('tr');
@@ -62,11 +65,13 @@
                     const indirectRate = 1 / directRate;
 
                     row.innerHTML = `
+                        <td>${index}</td>  <!-- Index column -->
                         <td class="currency">${currency}</td>
                         <td>${indirectRate.toFixed(4)}</td>
                         <td>${directRate.toFixed(4)}</td>
                     `;
                     tableBody.appendChild(row);
+                    index++;  // Increment the index
                 }
             }
         }
