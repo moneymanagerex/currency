@@ -26,7 +26,7 @@ jobs:
         # Loop through each base currency and fetch the rates
         for BASE_CURRENCY in "${BASE_CURRENCIES[@]}"; do
           echo "Fetching exchange rates for base currency: $BASE_CURRENCY"
-          curl -s "https://v6.exchangerate-api.com/v6/$API_KEY/latest/BASE_CURRENCY" > data/latest_${BASE_CURRENCY}.json
+          curl -s "https://v6.exchangerate-api.com/v6/$API_KEY/latest/$BASE_CURRENCY" > data/latest_${BASE_CURRENCY}.json
           
           # Optionally, validate the data (check if the file was created)
           if [ -f "data/latest_${BASE_CURRENCY}.json" ]; then
