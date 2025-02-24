@@ -20,7 +20,21 @@ jobs:
       env:
         API_KEY: ${{ secrets.EXCHANGE_RATE_API_KEY }}
       run: |
-        curl -s "https://v6.exchangerate-api.com/v6/$API_KEY/latest/USD" > data/latest.json
+        # Define base currencies array (you can extend this list)
+        BASE_CURRENCIES=("USD" "EUR" "GBP" "CNY" "AUD")
+        
+        # Loop through each base currency and fetch the rates
+        for BASE_CURRENCY in "${BASE_CURRENCIES[@]}"; do
+          echo "Fetching exchange rates for base currency: $BASE_CURRENCY"
+          curl -s "https://v6.exchangerate-api.com/v6/$API_KEY/latest/BASE_CURRENCY" > data/latest_${BASE_CURRENCY}.json
+          
+          # Optionally, validate the data (check if the file was created)
+          if [ -f "data/latest_${BASE_CURRENCY}.json" ]; then
+            echo "Rates for $BASE_CURRENCY fetched successfully."
+          else
+            echo "Failed to fetch rates for $BASE_CURRENCY."
+          fi
+        done
         
     - name: Commit & Push
       run: |
