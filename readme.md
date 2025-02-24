@@ -20,7 +20,7 @@ Third-party services or applications can fetch the exchange rate data through th
 https://moneymanagerex.github.io/currency/data/latest_{baseCurrency}.json
 
 For example:
-https://.github.io/currency/data/latest_USD.json
+https://moneymanagerex.github.io/currency/data/latest_USD.json
 This will return the exchange rates for USD as the base currency in a JSON format.
 
 ## Usage
